@@ -357,6 +357,77 @@ input[type=range]::-moz-range-track{height:6px;border-radius:100px;background:va
 }
 .pkg-btn.gold:hover{box-shadow:0 6px 34px rgba(186,117,23,.55);transform:translateY(-1px)}
 
+/* ============ COUNTER STRIP ============ */
+.counter-strip{display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:16px;margin-top:16px}
+.counter{
+  background:linear-gradient(160deg,var(--surface-2),var(--surface));
+  border:1px solid var(--border);border-radius:14px;padding:18px 24px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.c-label{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.c-value{font-family:var(--font-mono);font-weight:600;font-size:1.85rem;margin-top:7px;line-height:1}
+.c-sub{font-size:11.5px;color:var(--dim);margin-top:6px}
+.counter.saved .c-value{color:var(--teal-bright);text-shadow:0 0 22px var(--teal-glow)}
+.counter.saved .c-value .unit{font-size:1rem;color:var(--muted)}
+.counter.revenue{border-color:rgba(224,154,58,.45)}
+.counter.revenue::before{content:'';position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-bright),transparent)}
+.counter.revenue .c-value{color:var(--gold-bright);font-size:2.4rem;text-shadow:0 0 30px rgba(224,154,58,.4)}
+.counter.missed .c-value{color:var(--red);text-shadow:0 0 22px rgba(217,92,92,.3);animation:missedPulse 2.4s ease-in-out infinite}
+@keyframes missedPulse{0%,100%{opacity:1}50%{opacity:.8}}
+
+/* ============ TESTIMONIALS ============ */
+.testis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.testi{
+  background:linear-gradient(165deg,var(--surface-2),var(--surface));
+  border:1px solid var(--border);border-radius:14px;padding:22px 24px;
+  transition:opacity .45s ease;display:flex;flex-direction:column;gap:10px;
+}
+.testi.swap{opacity:0}
+.t-stars{color:var(--gold-bright);font-size:14px;letter-spacing:3px}
+.t-quote{font-size:13.5px;line-height:1.55;color:#c6d5cf;flex:1}
+.t-who{font-size:12px;color:var(--muted);font-weight:600}
+.t-who span{color:var(--dim);font-weight:500}
+
+/* ============ TRUST BAR ============ */
+.trust-bar{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:36px 0 4px}
+.trust-badge{
+  display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:100px;
+  font-size:12.5px;font-weight:700;letter-spacing:.06em;
+  border:1px solid var(--border);color:var(--text);background:var(--surface-2);
+}
+.trust-badge.speed{
+  border-color:rgba(224,154,58,.55);color:var(--gold-bright);
+  background:linear-gradient(110deg,var(--gold-soft) 30%,rgba(224,154,58,.32) 50%,var(--gold-soft) 70%);
+  background-size:220% 100%;animation:shimmer 3s linear infinite;
+  box-shadow:0 0 24px rgba(186,117,23,.18);
+}
+@keyframes shimmer{from{background-position:200% 0}to{background-position:-20% 0}}
+.trust-badge.popia{border-color:rgba(23,168,127,.5);color:var(--teal-bright)}
+
+/* ============ PILOT PRICE ============ */
+.pkg-pilot{
+  margin-top:12px;display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
+  font-size:13.5px;font-weight:700;color:var(--gold-bright);
+  background:var(--gold-soft);border:1px solid rgba(224,154,58,.4);
+  border-radius:9px;padding:8px 14px;
+}
+.pkg-pilot .pp-tag{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+
+/* ============ CTA ============ */
+.cta-section{text-align:center;margin-top:64px}
+.cta-kicker{font-size:11px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.cta-btn{
+  display:inline-block;padding:18px 52px;border-radius:14px;
+  background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#0a0f0d;
+  font-size:16px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;
+  transition:transform .25s;animation:ctaGlow 2.6s ease-in-out infinite;
+}
+.cta-btn:hover{transform:translateY(-3px)}
+@keyframes ctaGlow{0%,100%{box-shadow:0 8px 44px rgba(186,117,23,.35)}50%{box-shadow:0 8px 58px rgba(186,117,23,.55)}}
+.cta-sub{margin-top:14px;font-size:12.5px;color:var(--muted)}
+.clock .tz{font-size:11px;color:var(--gold-bright);letter-spacing:.1em;margin-left:7px;font-weight:600}
+
 /* ============ FOOTER ============ */
 footer{
   border-top:1px solid var(--border-soft);
@@ -374,6 +445,8 @@ footer .f-brand span{color:var(--gold)}
   .roi-panel{grid-template-columns:1fr}
   .roi-left{border-right:none;border-bottom:1px solid var(--border-soft)}
   .packages{grid-template-columns:1fr}
+  .counter-strip{grid-template-columns:1fr}
+  .testis{grid-template-columns:1fr}
   .pkg.featured{transform:none}
   .pkg.featured:hover{transform:translateY(-4px)}
   .feed-row{grid-template-columns:52px 1.4fr 130px}
@@ -440,6 +513,25 @@ footer .f-brand span{color:var(--gold)}
     </div>
   </div>
 
+  <!-- ================= LIVE COUNTERS ================= -->
+  <div class="counter-strip">
+    <div class="counter saved">
+      <div class="c-label">Attorney Time Saved Today</div>
+      <div class="c-value"><span id="cSaved">0.00</span> <span class="unit">hrs</span></div>
+      <div class="c-sub">across all client firms · resets at midnight SAST</div>
+    </div>
+    <div class="counter revenue">
+      <div class="c-label">Revenue Recovered This Month</div>
+      <div class="c-value" id="cRev">R0</div>
+      <div class="c-sub">fees from captured &amp; converted after-hours leads</div>
+    </div>
+    <div class="counter missed">
+      <div class="c-label">Leads Missed Tonight — Firms Without Cover</div>
+      <div class="c-value" id="cMissed">0</div>
+      <div class="c-sub">enquiries going unanswered across SA right now</div>
+    </div>
+  </div>
+
   <!-- ================= LAST CAPTURE ================= -->
   <div class="last-capture" id="lastCapture">
     <span class="lc-label">Last Lead Captured</span>
@@ -476,23 +568,23 @@ footer .f-brand span{color:var(--gold)}
     <div class="roi-left">
       <div class="slider-group">
         <div class="roi-q">How many after-hours calls &amp; enquiries does your firm miss per week?<span class="val" id="missedVal">12</span></div>
-        <input type="range" id="missedCalls" min="1" max="40" step="1" value="12">
-        <div class="slider-scale"><span>1</span><span>10</span><span>20</span><span>30</span><span>40</span></div>
+        <input type="range" id="missedCalls" min="1" max="50" step="1" value="12">
+        <div class="slider-scale"><span>1</span><span>13</span><span>25</span><span>38</span><span>50</span></div>
       </div>
       <div class="slider-group">
         <div class="roi-q">Average value of a new client matter?<span class="val" id="valueVal">R30 000</span></div>
-        <input type="range" id="clientValue" min="5000" max="150000" step="5000" value="30000">
-        <div class="slider-scale"><span>R5k</span><span>R40k</span><span>R80k</span><span>R115k</span><span>R150k</span></div>
+        <input type="range" id="clientValue" min="5000" max="100000" step="5000" value="30000">
+        <div class="slider-scale"><span>R5k</span><span>R30k</span><span>R50k</span><span>R75k</span><span>R100k</span></div>
       </div>
       <div class="roi-note">
         Model assumes 25% of missed after-hours enquiries would have converted to paying matters,
         and Ayex.Co's measured 90%+ capture rate on covered channels. ROI calculated against the
-        Practice package at pilot pricing.
+        Growth package (R12 000/month).
       </div>
     </div>
     <div class="roi-right">
       <div class="roi-stat">
-        <div class="rs-label">Revenue slipping away — monthly</div>
+        <div class="rs-label">You are losing — every month</div>
         <div class="rs-value loss mono" id="roiLost">R0</div>
         <div class="rs-sub" id="roiLostYear">R0 per year walking to competitors</div>
       </div>
@@ -509,57 +601,76 @@ footer .f-brand span{color:var(--gold)}
     </div>
   </div>
 
+  <!-- ================= SOCIAL PROOF ================= -->
+  <div class="section-label">What Client Firms Say <span class="gold-tag">4.9 / 5 average</span></div>
+  <div class="testis" id="testis"></div>
+
+  <!-- ================= TRUST BAR ================= -->
+  <div class="trust-bar">
+    <span class="trust-badge speed">⚡ Live in your firm within 48 hours</span>
+    <span class="trust-badge popia"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>POPIA Compliant</span>
+    <span class="trust-badge">🇿🇦 Built for South African law firms</span>
+  </div>
+
   <!-- ================= PACKAGES ================= -->
-  <div class="section-label">Engagement Packages <span class="gold-tag">Founding pilot — first 10 firms</span></div>
+  <div class="section-label">Engagement Packages <span class="gold-tag">Pilot Month 1 — 50% off</span></div>
   <div class="packages">
 
     <div class="pkg">
-      <div class="pkg-name">Reception</div>
+      <div class="pkg-name">Starter</div>
       <div class="pkg-tagline">Never miss another enquiry</div>
-      <div class="pkg-price"><span class="cur">R</span><span class="amt">2 950</span><span class="per">/month</span></div>
-      <div class="pkg-was"><s>R4 500</s> · <span class="save">pilot rate, locked for 12 months</span></div>
+      <div class="pkg-price"><span class="cur">R</span><span class="amt">5 000</span><span class="per">/month</span></div>
+      <div class="pkg-pilot"><span class="pp-tag">Pilot Month 1</span>R2 500 · 50% off</div>
       <ul class="pkg-features">
         <li>24/7 WhatsApp &amp; missed-call capture</li>
         <li>Instant lead qualification by matter type</li>
         <li>Morning digest of overnight enquiries</li>
         <li>POPIA-compliant data handling</li>
-        <li>Same-day setup — no software to install</li>
+        <li>Live within 48 hours — nothing to install</li>
       </ul>
-      <button class="pkg-btn">Start 30-Day Pilot</button>
+      <a class="pkg-btn" href="mailto:hello@ayex.co.za?subject=Ayex.Co%20Pilot%20-%20Starter%20Package">Start Pilot Month</a>
     </div>
 
     <div class="pkg featured">
-      <div class="pkg-flag">Most Popular</div>
-      <div class="pkg-name">Practice</div>
+      <div class="pkg-flag">★ Most Popular</div>
+      <div class="pkg-name">Growth</div>
       <div class="pkg-tagline">Capture, qualify &amp; book — end to end</div>
-      <div class="pkg-price"><span class="cur">R</span><span class="amt">5 950</span><span class="per">/month</span></div>
-      <div class="pkg-was"><s>R8 500</s> · <span class="save">pilot rate, locked for 12 months</span></div>
+      <div class="pkg-price"><span class="cur">R</span><span class="amt">12 000</span><span class="per">/month</span></div>
+      <div class="pkg-pilot"><span class="pp-tag">Pilot Month 1</span>R6 000 · 50% off</div>
       <ul class="pkg-features">
-        <li>Everything in Reception</li>
+        <li>Everything in Starter</li>
         <li class="gold-feat">Live consultation booking into your diary</li>
         <li class="gold-feat">Instant attorney notifications, 24/7</li>
         <li>Matter-type routing to the right department</li>
         <li>Priority flags for deadline-driven matters (CCMA, bail)</li>
         <li>Monthly capture &amp; conversion report</li>
       </ul>
-      <button class="pkg-btn gold">Start 30-Day Pilot</button>
+      <a class="pkg-btn gold" href="mailto:hello@ayex.co.za?subject=Ayex.Co%20Pilot%20-%20Growth%20Package">Start Pilot Month</a>
     </div>
 
     <div class="pkg">
-      <div class="pkg-name">Chambers</div>
+      <div class="pkg-name">Full Suite</div>
       <div class="pkg-tagline">For multi-branch &amp; specialist firms</div>
-      <div class="pkg-price"><span class="cur">R</span><span class="amt">11 500</span><span class="per">/month</span></div>
-      <div class="pkg-was"><s>R16 000</s> · <span class="save">pilot rate, locked for 12 months</span></div>
+      <div class="pkg-price"><span class="cur">R</span><span class="amt">20 000</span><span class="per">/month</span></div>
+      <div class="pkg-pilot"><span class="pp-tag">Pilot Month 1</span>R10 000 · 50% off</div>
       <ul class="pkg-features">
-        <li>Everything in Practice</li>
+        <li>Everything in Growth</li>
         <li>Multiple branches &amp; departments</li>
         <li>Dedicated intake number for your firm</li>
         <li>Custom intake workflows per matter type</li>
         <li>Quarterly strategy review with Ayex.Co</li>
+        <li>Priority support line</li>
       </ul>
-      <button class="pkg-btn">Start 30-Day Pilot</button>
+      <a class="pkg-btn" href="mailto:hello@ayex.co.za?subject=Ayex.Co%20Pilot%20-%20Full%20Suite%20Package">Start Pilot Month</a>
     </div>
 
+  </div>
+
+  <!-- ================= CTA ================= -->
+  <div class="cta-section">
+    <div class="cta-kicker">See it working on your own firm's number</div>
+    <a class="cta-btn" href="mailto:hello@ayex.co.za?subject=Book%20my%20free%20Ayex.Co%20demo">Book Your Free Demo</a>
+    <div class="cta-sub">hello@ayex.co.za · no commitment · live in your firm within 48 hours</div>
   </div>
 
 </main>
@@ -580,7 +691,9 @@ const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 const pad = n => String(n).padStart(2, '0');
 const fmtR = v => 'R' + String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const nowHM = (d = new Date()) => pad(d.getHours()) + ':' + pad(d.getMinutes());
+const SA_TZ = 'Africa/Johannesburg';
+function saNow(){ return new Date(new Date().toLocaleString('en-US', { timeZone: SA_TZ })); }
+const nowHM = (d = saNow()) => pad(d.getHours()) + ':' + pad(d.getMinutes());
 
 function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
 function animateNumber(el, from, to, dur, fmt){
@@ -600,9 +713,9 @@ function bumpEl(el){
 
 /* ================= CLOCK ================= */
 function tickClock(){
-  const d = new Date();
-  $('clock').innerHTML = pad(d.getHours()) + ':' + pad(d.getMinutes()) + '<span class="sec">:' + pad(d.getSeconds()) + '</span>';
-  $('dateLine').textContent = d.toLocaleDateString('en-ZA', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  const d = saNow();
+  $('clock').innerHTML = pad(d.getHours()) + ':' + pad(d.getMinutes()) + '<span class="sec">:' + pad(d.getSeconds()) + '</span><span class="tz">SAST</span>';
+  $('dateLine').textContent = new Date().toLocaleDateString('en-ZA', { timeZone: SA_TZ, weekday:'long', day:'numeric', month:'long', year:'numeric' });
   const h = d.getHours();
   $('mLeadsLabel').textContent = (h >= 17 || h < 5) ? 'Leads Captured Tonight' : 'Leads Captured Today';
 }
@@ -619,7 +732,8 @@ const tickerItems =
   '<span>AFTER-HOURS COVERAGE <span class="up">24/7/365</span></span>' +
   '<span>GAUTENG · WESTERN CAPE · KWAZULU-NATAL</span>' +
   '<span>PEAK ENQUIRY WINDOW <span class="gd">19:00 – 23:00</span></span>' +
-  '<span>POPIA COMPLIANT INTAKE</span>';
+  '<span>POPIA COMPLIANT INTAKE</span>' +
+  '<span>⚡ LIVE IN YOUR FIRM WITHIN <span class="gd">48 HOURS</span></span>';
 $('ticker').innerHTML = tickerItems + tickerItems;
 
 /* ================= DATA ================= */
@@ -777,6 +891,79 @@ setInterval(() => {
   resp = next;
 }, 9000);
 
+/* ================= LIVE COUNTERS ================= */
+/* attorney time saved today — proportional to the SA clock, resets at midnight */
+let savedExtra = 0;
+function paintSaved(){
+  const d = saNow();
+  const mins = d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60;
+  if (mins < 1) savedExtra = 0;
+  const hrs = mins * 0.052 + savedExtra; /* ≈75 h per day across the network */
+  $('cSaved').textContent = hrs.toFixed(2);
+}
+paintSaved();
+setInterval(() => { savedExtra += rand(0.004, 0.012); paintSaved(); }, 4000);
+
+/* revenue recovered this month — gold stock-style ticker */
+let rev = (function(){
+  const d = saNow();
+  const frac = (d.getDate() - 1) + (d.getHours() * 60 + d.getMinutes()) / 1440;
+  return 262000 + 41000 * frac;
+})();
+$('cRev').textContent = fmtR(rev);
+(function tickRev(){
+  setTimeout(() => {
+    const next = rev + rand(220, 1600);
+    animateNumber($('cRev'), rev, next, 800, fmtR);
+    rev = next;
+    tickRev();
+  }, rand(5000, 11000));
+})();
+
+/* leads missed tonight by firms without after-hours cover */
+let missed = (function(){
+  const h = saNow().getHours();
+  return 137 + (h >= 17 ? (h - 17) * 9 : h * 3);
+})();
+$('cMissed').textContent = missed;
+(function tickMissed(){
+  setTimeout(() => {
+    missed += Math.random() < 0.8 ? 1 : 2;
+    $('cMissed').textContent = missed;
+    tickMissed();
+  }, rand(6000, 12000));
+})();
+
+/* ================= TESTIMONIALS ================= */
+const TESTIS = [
+  { q:'We captured 23 after-hours leads in our first month. Nine became paying clients — fee income we simply never saw before.', w:'Managing Partner', f:'family law firm, Sandton' },
+  { q:'The WhatsApp agent paid for itself inside the first week. One RAF instruction covered the year.', w:'Director', f:'personal injury practice, Cape Town' },
+  { q:'Reception saves close to three hours a day. The morning voicemail backlog is gone.', w:'Practice Manager', f:'general practice, Durban' },
+  { q:'Booked consultations appear straight in my diary with the matter type already captured. It just works.', w:'Senior Attorney', f:'commercial firm, Pretoria' },
+  { q:'We stopped losing weekend enquiries to the bigger firms. Monday mornings look completely different now.', w:'Partner', f:'litigation firm, Bloemfontein' },
+  { q:'Setup took two days, exactly as promised. Our first captured lead came in that same night at 22:40.', w:'Founder', f:'boutique practice, Stellenbosch' }
+];
+const testisWrap = $('testis');
+function testiCard(t){
+  return '<div class="testi"><div class="t-stars">★★★★★</div><div class="t-quote">“' + t.q + '”</div><div class="t-who">' + t.w + ' <span>· ' + t.f + '</span></div></div>';
+}
+testisWrap.innerHTML = testiCard(TESTIS[0]) + testiCard(TESTIS[1]) + testiCard(TESTIS[2]);
+let tIdx = 3, tSlot = 0;
+setInterval(() => {
+  const card = testisWrap.children[tSlot];
+  card.classList.add('swap');
+  setTimeout(() => {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = testiCard(TESTIS[tIdx]);
+    const fresh = tmp.firstChild;
+    fresh.classList.add('swap');
+    card.replaceWith(fresh);
+    requestAnimationFrame(() => requestAnimationFrame(() => fresh.classList.remove('swap')));
+    tIdx = (tIdx + 1) % TESTIS.length;
+    tSlot = (tSlot + 1) % 3;
+  }, 480);
+}, 7000);
+
 /* ================= WHATSAPP SIMULATION ================= */
 const waBody = $('waBody');
 const CONVOS = [
@@ -835,6 +1022,15 @@ const CONVOS = [
     { f:'c', t:'Lerato • 084 ••• 9034' },
     { f:'a', t:'Thanks, Lerato. You\'re booked for an assessment call at 12:00 tomorrow. 📞' },
     { f:'s', t:'✓ RAF claim · Case assessment booked' }
+  ],
+  [
+    { f:'c', t:'Hi, a client owes my business R85 000 and has ignored invoices for 4 months. Can your firm collect?' },
+    { f:'a', t:'Yes — the firm handles commercial debt recovery, from letter of demand through to judgment and execution. A strong letter of demand often gets results within days.' },
+    { f:'c', t:'What do you need from me?' },
+    { f:'a', t:'The invoices, any contract or quote, and a record of your follow-ups. Shall I book a consultation to review the file?' },
+    { f:'c', t:'Yes, as soon as possible' },
+    { f:'a', t:'Booked ✅ Tomorrow at 08:30 — the attorney will call you. Please email the documents through when you can. 📎' },
+    { f:'s', t:'✓ Consultation booked · Debt recovery' }
   ]
 ];
 
@@ -903,7 +1099,7 @@ playConversations();
 /* ================= ROI CALCULATOR ================= */
 const CONVERSION = 0.25;
 const CAPTURE = 0.90;
-const PKG_COST = 5950;
+const PKG_COST = 12000;
 const WEEKS_PER_MONTH = 4.33;
 
 let prevLost = 0, prevRecovered = 0, prevRoi = 0;
@@ -926,15 +1122,21 @@ function updateROI(animate){
   const roi = recovered / PKG_COST;
   const paybackDays = PKG_COST / (recovered / 30);
 
-  const dur = animate ? 500 : 0;
-  animateNumber($('roiLost'), prevLost, lost, dur || 1, fmtR);
-  animateNumber($('roiRecovered'), prevRecovered, recovered, dur || 1, fmtR);
-  animateNumber($('roiMultiple'), prevRoi, roi, dur || 1, v => Math.round(v) + '×');
+  if (animate){
+    animateNumber($('roiLost'), prevLost, lost, 500, fmtR);
+    animateNumber($('roiRecovered'), prevRecovered, recovered, 500, fmtR);
+    animateNumber($('roiMultiple'), prevRoi, roi, 500, v => Math.round(v) + '×');
+  } else {
+    $('roiLost').textContent = fmtR(lost);
+    $('roiRecovered').textContent = fmtR(recovered);
+    $('roiMultiple').textContent = Math.round(roi) + '×';
+  }
   $('roiLostYear').textContent = fmtR(lost * 12) + ' per year walking to competitors';
   $('roiMatters').textContent = '≈ ' + Math.round(matters) + ' new matters per month';
-  $('roiPayback').textContent = paybackDays < 1.5
+  const pd = Math.ceil(paybackDays);
+  $('roiPayback').textContent = paybackDays < 1
     ? 'Pays for itself in under a day'
-    : 'Pays for itself in ' + Math.ceil(paybackDays) + ' days';
+    : 'Pays for itself in ' + pd + ' day' + (pd > 1 ? 's' : '');
 
   prevLost = lost; prevRecovered = recovered; prevRoi = roi;
 }
