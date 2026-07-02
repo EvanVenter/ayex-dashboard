@@ -718,7 +718,7 @@ footer .f-brand span{color:var(--gold)}
   <!-- ================= CTA ================= -->
   <div class="cta-section">
     <div class="cta-kicker">See it working on your own firm's number</div>
-    <a class="cta-btn" href="mailto:hello@ayex.co.za?subject=Book%20my%20free%20Ayex.Co%20demo">Book Your Free Demo</a>
+    <a class="cta-btn" href="mailto:hello@ayex.co.za?subject=Book%20my%20free%20Ayex.Co%20demo" data-to="hello@ayex.co.za" data-su="Book%20my%20free%20Ayex.Co%20demo">Book Your Free Demo</a>
     <div class="cta-sub">hello@ayex.co.za · no commitment · live in your firm within 48 hours</div>
   </div>
 
@@ -1178,10 +1178,16 @@ function openPkgModal(key){
   $('modalPkgName').textContent = p.name;
   $('modalPilot').textContent = p.pilot;
   $('modalMonthly').textContent = 'then ' + p.monthly + '/month · cancel any time';
-  const subj = s => 'mailto:Venter@ayex.co.za?subject=' + encodeURIComponent(s + ' — ' + p.name);
-  $('mCoffee').href = subj('Coffee Meeting');
-  $('mZoom').href = subj('Zoom Demo');
-  $('mInfo').href = subj('More Info');
+  const setMail = (id, subject) => {
+    const a = $(id);
+    const su = encodeURIComponent(subject + ' — ' + p.name);
+    a.href = 'mailto:Venter@ayex.co.za?subject=' + su;
+    a.dataset.to = 'Venter@ayex.co.za';
+    a.dataset.su = su;
+  };
+  setMail('mCoffee', 'Coffee Meeting');
+  setMail('mZoom', 'Zoom Demo');
+  setMail('mInfo', 'More Info');
   $('mWa').href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent('Hi Ayex.Co — I\'m interested in the ' + p.name + ' package');
   pkgModal.classList.add('open');
   pkgModal.setAttribute('aria-hidden', 'false');
@@ -1194,6 +1200,24 @@ document.querySelectorAll('.pkg').forEach(el => el.addEventListener('click', () 
 pkgModal.addEventListener('click', e => { if (e.target === pkgModal) closePkgModal(); });
 $('modalClose').addEventListener('click', closePkgModal);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePkgModal(); });
+
+/* mailto fallback — if no mail app is configured, the mailto click silently does nothing;
+   detect that (window never loses focus) and open Gmail compose in a new tab instead */
+function attachMailFallback(a){
+  a.addEventListener('click', () => {
+    if (!a.dataset.to) return;
+    const gmail = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + a.dataset.to + '&su=' + (a.dataset.su || '');
+    let left = false;
+    const onLeave = () => { left = true; };
+    window.addEventListener('blur', onLeave, { once: true });
+    setTimeout(() => {
+      window.removeEventListener('blur', onLeave);
+      if (!left && !document.hidden) window.open(gmail, '_blank');
+    }, 1400);
+  });
+}
+['mCoffee', 'mZoom', 'mInfo'].forEach(id => attachMailFallback($(id)));
+attachMailFallback(document.querySelector('.cta-btn'));
 
 /* ================= ROI CALCULATOR ================= */
 const CONVERSION = 0.25;
