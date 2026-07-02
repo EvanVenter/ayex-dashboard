@@ -428,6 +428,60 @@ input[type=range]::-moz-range-track{height:6px;border-radius:100px;background:va
 .cta-sub{margin-top:14px;font-size:12.5px;color:var(--muted)}
 .clock .tz{font-size:11px;color:var(--gold-bright);letter-spacing:.1em;margin-left:7px;font-weight:600}
 
+/* ============ PACKAGE SELECTION MODAL ============ */
+.pkg{cursor:pointer}
+.pkg.selected{border-color:var(--gold-bright);box-shadow:0 0 44px rgba(224,154,58,.28)}
+.modal-overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(4,9,7,.8);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{
+  background:linear-gradient(165deg,#13201a,#0b1410);
+  border:1px solid rgba(23,168,127,.4);border-radius:18px;
+  padding:40px 42px 32px;max-width:470px;width:calc(100% - 40px);
+  position:relative;overflow:hidden;
+  transform:translateY(18px) scale(.97);
+  transition:transform .35s cubic-bezier(.2,.9,.3,1.2);
+  box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 60px rgba(15,110,86,.15);
+}
+.modal::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,transparent,var(--gold-bright),transparent)}
+.modal-overlay.open .modal{transform:none}
+.modal-close{
+  position:absolute;top:12px;right:16px;background:none;border:none;
+  color:var(--muted);font-size:26px;cursor:pointer;line-height:1;padding:4px;
+}
+.modal-close:hover{color:var(--text)}
+.modal-kicker{font-size:10.5px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.modal-pkg{font-size:30px;font-weight:800;margin-top:6px;letter-spacing:.02em}
+.modal-price{margin-top:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.modal-price .big{font-family:var(--font-mono);font-size:40px;font-weight:600;color:var(--gold-bright);text-shadow:0 0 30px rgba(224,154,58,.35);line-height:1}
+.modal-price .mp-note{
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  color:var(--gold-bright);border:1px solid rgba(224,154,58,.4);
+  background:var(--gold-soft);padding:5px 11px;border-radius:100px;
+}
+.modal-sub{font-size:12.5px;color:var(--muted);margin-top:8px}
+.modal-actions{display:flex;flex-direction:column;gap:10px;margin-top:26px}
+.modal-btn{
+  display:block;text-align:center;padding:13px;border-radius:10px;
+  font-size:13.5px;font-weight:700;letter-spacing:.06em;text-decoration:none;
+  border:1px solid rgba(23,168,127,.45);color:var(--teal-bright);
+  background:rgba(23,168,127,.07);transition:all .2s;
+}
+.modal-btn:hover{background:rgba(23,168,127,.15);transform:translateY(-1px)}
+.modal-btn.gold{
+  background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+  color:#0a0f0d;border-color:transparent;
+  box-shadow:0 4px 22px rgba(186,117,23,.35);
+}
+.modal-btn.gold:hover{box-shadow:0 6px 30px rgba(186,117,23,.5)}
+.modal-wa{margin-top:22px;text-align:center;font-size:12.5px;color:var(--muted);border-top:1px solid var(--border-soft);padding-top:16px}
+.modal-wa a{color:var(--teal-bright);font-weight:700;text-decoration:none}
+.modal-wa a:hover{text-decoration:underline}
+
 /* ============ FOOTER ============ */
 footer{
   border-top:1px solid var(--border-soft);
@@ -616,52 +670,47 @@ footer .f-brand span{color:var(--gold)}
   <div class="section-label">Engagement Packages <span class="gold-tag">Pilot Month 1 — 50% off</span></div>
   <div class="packages">
 
-    <div class="pkg">
+    <div class="pkg" data-pkg="starter">
       <div class="pkg-name">Starter</div>
       <div class="pkg-tagline">Never miss another enquiry</div>
       <div class="pkg-price"><span class="cur">R</span><span class="amt">5 000</span><span class="per">/month</span></div>
       <div class="pkg-pilot"><span class="pp-tag">Pilot Month 1</span>R2 500 · 50% off</div>
       <ul class="pkg-features">
-        <li>24/7 WhatsApp &amp; missed-call capture</li>
-        <li>Instant lead qualification by matter type</li>
-        <li>Morning digest of overnight enquiries</li>
-        <li>POPIA-compliant data handling</li>
-        <li>Live within 48 hours — nothing to install</li>
+        <li>WhatsApp Intake Agent</li>
+        <li>24/7 Lead Capture</li>
+        <li>Auto Consultation Booking</li>
+        <li>Monthly Report</li>
       </ul>
-      <a class="pkg-btn" href="mailto:hello@ayex.co.za?subject=Ayex.Co%20Pilot%20-%20Starter%20Package">Start Pilot Month</a>
+      <button class="pkg-btn" type="button">Choose Starter</button>
     </div>
 
-    <div class="pkg featured">
+    <div class="pkg featured" data-pkg="growth">
       <div class="pkg-flag">★ Most Popular</div>
       <div class="pkg-name">Growth</div>
-      <div class="pkg-tagline">Capture, qualify &amp; book — end to end</div>
+      <div class="pkg-tagline">Capture, book, draft &amp; bill — end to end</div>
       <div class="pkg-price"><span class="cur">R</span><span class="amt">12 000</span><span class="per">/month</span></div>
       <div class="pkg-pilot"><span class="pp-tag">Pilot Month 1</span>R6 000 · 50% off</div>
       <ul class="pkg-features">
         <li>Everything in Starter</li>
-        <li class="gold-feat">Live consultation booking into your diary</li>
-        <li class="gold-feat">Instant attorney notifications, 24/7</li>
-        <li>Matter-type routing to the right department</li>
-        <li>Priority flags for deadline-driven matters (CCMA, bail)</li>
-        <li>Monthly capture &amp; conversion report</li>
+        <li class="gold-feat">AI Document Drafter</li>
+        <li class="gold-feat">Billing Automation</li>
+        <li>Monthly Strategy Call</li>
       </ul>
-      <a class="pkg-btn gold" href="mailto:hello@ayex.co.za?subject=Ayex.Co%20Pilot%20-%20Growth%20Package">Start Pilot Month</a>
+      <button class="pkg-btn gold" type="button">Choose Growth</button>
     </div>
 
-    <div class="pkg">
+    <div class="pkg" data-pkg="full">
       <div class="pkg-name">Full Suite</div>
-      <div class="pkg-tagline">For multi-branch &amp; specialist firms</div>
+      <div class="pkg-tagline">The complete AI practice engine</div>
       <div class="pkg-price"><span class="cur">R</span><span class="amt">20 000</span><span class="per">/month</span></div>
       <div class="pkg-pilot"><span class="pp-tag">Pilot Month 1</span>R10 000 · 50% off</div>
       <ul class="pkg-features">
         <li>Everything in Growth</li>
-        <li>Multiple branches &amp; departments</li>
-        <li>Dedicated intake number for your firm</li>
-        <li>Custom intake workflows per matter type</li>
-        <li>Quarterly strategy review with Ayex.Co</li>
-        <li>Priority support line</li>
+        <li>Legal Research Agent</li>
+        <li>Google Reviews Agent</li>
+        <li>Priority Support</li>
       </ul>
-      <a class="pkg-btn" href="mailto:hello@ayex.co.za?subject=Ayex.Co%20Pilot%20-%20Full%20Suite%20Package">Start Pilot Month</a>
+      <button class="pkg-btn" type="button">Choose Full Suite</button>
     </div>
 
   </div>
@@ -674,6 +723,23 @@ footer .f-brand span{color:var(--gold)}
   </div>
 
 </main>
+
+<!-- ================= PACKAGE MODAL ================= -->
+<div class="modal-overlay" id="pkgModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+    <div class="modal-kicker">You've Selected</div>
+    <div class="modal-pkg" id="modalPkgName">Growth</div>
+    <div class="modal-price"><span class="big" id="modalPilot">R6 000</span><span class="mp-note">Pilot Month 1 · 50% off</span></div>
+    <div class="modal-sub" id="modalMonthly">then R12 000/month · cancel any time</div>
+    <div class="modal-actions">
+      <a class="modal-btn gold" id="mCoffee" href="#">☕ Book a Coffee Meeting</a>
+      <a class="modal-btn" id="mZoom" href="#">🎥 Book a Zoom Demo</a>
+      <a class="modal-btn" id="mInfo" href="#">📄 Send Me More Info</a>
+    </div>
+    <div class="modal-wa">Or WhatsApp us directly → <a id="mWa" href="#" target="_blank" rel="noopener">chat on WhatsApp</a></div>
+  </div>
+</div>
 
 <footer>
   <span class="f-brand">AYEX<span>.CO</span> — After-hours intake for South African law firms</span>
@@ -1095,6 +1161,39 @@ async function playConversations(){
   }
 }
 playConversations();
+
+/* ================= PACKAGE SELECTION ================= */
+const PKG_DATA = {
+  starter: { name:'Starter',    pilot:'R2 500',  monthly:'R5 000'  },
+  growth:  { name:'Growth',     pilot:'R6 000',  monthly:'R12 000' },
+  full:    { name:'Full Suite', pilot:'R10 000', monthly:'R20 000' }
+};
+const WHATSAPP_NUMBER = '27XXXXXXXXX'; /* TODO: replace with Ayex.Co WhatsApp number, international format without + */
+const pkgModal = $('pkgModal');
+
+function openPkgModal(key){
+  const p = PKG_DATA[key];
+  if (!p) return;
+  document.querySelectorAll('.pkg').forEach(el => el.classList.toggle('selected', el.dataset.pkg === key));
+  $('modalPkgName').textContent = p.name;
+  $('modalPilot').textContent = p.pilot;
+  $('modalMonthly').textContent = 'then ' + p.monthly + '/month · cancel any time';
+  const subj = s => 'mailto:Venter@ayex.co.za?subject=' + encodeURIComponent(s + ' — ' + p.name);
+  $('mCoffee').href = subj('Coffee Meeting');
+  $('mZoom').href = subj('Zoom Demo');
+  $('mInfo').href = subj('More Info');
+  $('mWa').href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent('Hi Ayex.Co — I\'m interested in the ' + p.name + ' package');
+  pkgModal.classList.add('open');
+  pkgModal.setAttribute('aria-hidden', 'false');
+}
+function closePkgModal(){
+  pkgModal.classList.remove('open');
+  pkgModal.setAttribute('aria-hidden', 'true');
+}
+document.querySelectorAll('.pkg').forEach(el => el.addEventListener('click', () => openPkgModal(el.dataset.pkg)));
+pkgModal.addEventListener('click', e => { if (e.target === pkgModal) closePkgModal(); });
+$('modalClose').addEventListener('click', closePkgModal);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePkgModal(); });
 
 /* ================= ROI CALCULATOR ================= */
 const CONVERSION = 0.25;
